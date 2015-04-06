@@ -1,3 +1,5 @@
+knime://LOCAL/mean_q0.2_Clusters.csv
+knime://LOCAL/mean_q0.05_Clusters.csv
 knime://LOCAL/mean_q0.1_Clusters.csv
 knime://LOCAL/urls.csv
 knime://LOCAL/flickr.csv

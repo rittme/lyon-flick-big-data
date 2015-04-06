@@ -45,10 +45,11 @@
         console.log(coords);
         var lonLat = new OpenLayers.LonLat(coords[1], coords[2]).transform(fromProjection, toProjection);
         var point = new OpenLayers.Geometry.Point(lonLat.lon, lonLat.lat);
+        console.log(coords[5]*10000);
         var mycircle = OpenLayers.Geometry.Polygon.createRegularPolygon
         (
             point,
-            coords[3],
+            coords[4]*40000,
             20,
             0
         );
@@ -63,7 +64,7 @@
         featurecircle.style = selected_polygon_style;
         var featurePoint = new OpenLayers.Feature.Vector(
             point,
-            { description: '<a target="_blank" href=https://www.flickr.com/photos/' + coords[4] + '><img src="' + coords[4] + '"></a>' },
+            { description: '<a target="_blank" href=https://www.flickr.com/photos/' + coords[3] + '><img src="' + coords[3] + '"></a><br>'+ coords[0] },
             { externalGraphic: markers[markerIt].marker,
               graphicHeight: 41, graphicWidth: 25, graphicXOffset: -13, graphicYOffset: -35 }
         );

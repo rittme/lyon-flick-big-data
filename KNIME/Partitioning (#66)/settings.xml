@@ -6,12 +6,12 @@
 <entry key="memory_policy" type="xstring" value="CacheSmallInMemory"/>
 </config>
 <config key="model">
-<entry key="method" type="xstring" value="Absolute"/>
+<entry key="method" type="xstring" value="Relative"/>
 <entry key="samplingMethod" type="xstring" value="Linear"/>
 <entry key="fraction" type="xdouble" value="0.2"/>
 <entry key="count" type="xint" value="2000"/>
 <entry key="random_seed" type="xstring" isnull="true" value=""/>
-<entry key="class_column" type="xstring" isnull="true" value=""/>
+<entry key="class_column" type="xstring" value="URL"/>
 </config>
 <entry key="customDescription" type="xstring" isnull="true" value=""/>
 <entry key="state" type="xstring" value="CONFIGURED"/>

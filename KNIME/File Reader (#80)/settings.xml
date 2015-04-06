@@ -6,7 +6,7 @@
 <entry key="memory_policy" type="xstring" value="CacheSmallInMemory"/>
 </config>
 <config key="model">
-<entry key="DataURL" type="xstring" value="knime://LOCAL/mean_q0.1_Clusters.csv"/>
+<entry key="DataURL" type="xstring" value="knime://LOCAL/mean_q0.2_Clusters.csv"/>
 <config key="Delimiters">
 <config key="Delim0">
 <entry key="pattern" type="xstring" value="%%00010"/>
@@ -49,7 +49,7 @@
 <entry key="CombineMultDelims" type="xboolean" value="false"/>
 <entry key="SkipFirstLines" type="xlong" value="0"/>
 <entry key="NewLineInQuotes" type="xboolean" value="false"/>
-<entry key="TableName" type="xstring" value="mean_q0.1_Clusters.csv"/>
+<entry key="TableName" type="xstring" value="mean_q0.2_Clusters.csv"/>
 <entry key="hasColHdr" type="xboolean" value="true"/>
 <entry key="hasRowHdr" type="xboolean" value="false"/>
 <entry key="ignoreEmptyLines" type="xboolean" value="true"/>

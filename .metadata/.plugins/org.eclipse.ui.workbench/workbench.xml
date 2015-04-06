@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="13" version="2.0">
+<?xml version="1.0" encoding="UTF-8"?><workbench progressCount="13" version="2.0">
 <workbenchAdvisor/>
 <window height="764" maximized="true" width="1020" x="1693" y="183">
 <fastViewData fastViewLocation="1024"/>
@@ -16,16 +15,16 @@
 <editorArea activeWorkbook="DefaultEditorWorkbook">
 <info part="DefaultEditorWorkbook">
 <folder appearance="1" expanded="2">
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"><part id="1"/>
 <part id="0"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor activePart="true" focus="true" id="org.knime.workbench.editor.WorkflowEditor" name="workflow.knime" partName="0: KNIME" title="0: KNIME" tooltip="0: KNIME" workbook="DefaultEditorWorkbook">
+
+<editor id="org.knime.workbench.editor.WorkflowEditor" name="workflow.knime" partName="0: KNIME" title="0: KNIME" tooltip="0: KNIME" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" uri="knime://LOCAL/KNIME/workflow.knime"/>
-</editor>
-</editors>
+</editor><editor activePart="true" focus="true" id="org.eclipse.ui.browser.editor" name="KNIME Intro" partName="KNIME Intro" title="Welcome to KNIME" tooltip="Welcome to KNIME" workbook="DefaultEditorWorkbook"><input factoryID="org.eclipse.ui.browser.elementFactory" id="org.knime.intro.page" url="file:/var/folders/vq/rxp7r5yj3dj7mn1mtmmsc8nm0000gn/T/intro8817227149536756198.html"/></editor></editors>
 <views>
 <view id="org.knime.workbench.ui.startupMessages" partName="Startup Messages">
 <viewState/>

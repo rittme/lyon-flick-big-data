@@ -1,1 +1,2 @@
+knime://LOCAL/server/output.csv
 knime://LOCAL/output_to_mean_shift.csv
