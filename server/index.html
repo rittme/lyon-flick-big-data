@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body style="margin:0">
+  <div id="demoMap" style="height:100vh; width:100vw"></div>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/openlayers/2.13.1/OpenLayers.js"></script>
+  <script src="csvtoarray.js"></script>
+  <script>
+    // Different pointers colors
+    var markers = [
+      {marker: 'img/1marker.png', color: '#3985C5'},
+      {marker: 'img/2marker.png', color: '#BA353B'},
+      {marker: 'img/3marker.png', color: '#5BA950'},
+      {marker: 'img/4marker.png', color: '#DEC326'},
+      {marker: 'img/5marker.png', color: '#B832A9'},
+      {marker: 'img/6marker.png', color: '#787878'},
+      {marker: 'img/7marker.png', color: '#2A2A2A'},
+      {marker: 'img/8marker.png', color: '#D8722E'},
+      {marker: 'img/9marker.png', color: '#2ECF9C'},
+      {marker: 'img/10marker.png', color: '#580DCB'},
+      {marker: 'img/11marker.png', color: '#2B389A'}
+    ];
+
+    // Create map
+    function init(data) {
+      // Initialises map in Lyon
+      map = new OpenLayers.Map("demoMap");
+      var mapnik         = new OpenLayers.Layer.OSM();
+      var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
+      var toProjection   = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
+      var position       = new OpenLayers.LonLat(4.8217,45.746).transform( fromProjection, toProjection);
+      var zoom           = 13;
+      var newLayer = new OpenLayers.Layer.OSM("Map", "http://b.tile.openstreetmap.fr/hot/${z}/${x}/${y}.png");
+      map.addLayer(newLayer);
+
+      // Defines vector overlay
+      var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
+
+      var markerIt = 0;
+      // For each cluster data, create feature
+      for(coords of data) {
+        console.log(coords);
+        var lonLat = new OpenLayers.LonLat(coords[1], coords[2]).transform(fromProjection, toProjection);
+        var point = new OpenLayers.Geometry.Point(lonLat.lon, lonLat.lat);
+        var mycircle = OpenLayers.Geometry.Polygon.createRegularPolygon
+        (
+            point,
+            coords[3],
+            20,
+            0
+        );
+
+        var featurecircle = new OpenLayers.Feature.Vector(mycircle);
+        var selected_polygon_style = {
+            strokeWidth: 0,
+            fillColor: markers[markerIt].color,
+            fillOpacity: 0.5
+
+        };
+        featurecircle.style = selected_polygon_style;
+        var featurePoint = new OpenLayers.Feature.Vector(
+            point,
+            { description: '<a target="_blank" href=https://www.flickr.com/photos/' + coords[4] + '><img src="' + coords[4] + '"></a>' },
+            { externalGraphic: markers[markerIt].marker,
+              graphicHeight: 41, graphicWidth: 25, graphicXOffset: -13, graphicYOffset: -35 }
+        );
+        vectorLayer.addFeatures([featurecircle, featurePoint]);
+
+        markerIt++;
+        if(markerIt>10){ markerIt = 0;}
+      }
+
+      map.addLayer(vectorLayer);
+      map.setCenter(position, zoom );
+
+      //Add a selector control to the vectorLayer with popup functions
+      var controls = {
+        selector: new OpenLayers.Control.SelectFeature(vectorLayer, { onSelect: createPopup, onUnselect: destroyPopup })
+      };
+
+      function createPopup(feature) {
+        feature.popup = new OpenLayers.Popup.FramedCloud("pop",
+            feature.geometry.getBounds().getCenterLonLat(),
+            null,
+            '<div class="markerContent">'+feature.attributes.description+'</div>',
+            null,
+            true,
+            function() { controls['selector'].unselectAll(); }
+        );
+        //feature.popup.closeOnMove = true;
+        map.addPopup(feature.popup);
+      }
+
+      function destroyPopup(feature) {
+        feature.popup.destroy();
+        feature.popup = null;
+      }
+
+      map.addControl(controls['selector']);
+      controls['selector'].activate();
+    }
+    var httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = function() {
+      if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+          var data = CSVToArray( httpRequest.responseText, ',' );
+          init(data);
+      }
+    };
+    httpRequest.open('GET', '/output.csv', true);
+    httpRequest.send(null);
+
+
+  </script>
+</body>
+</html>
